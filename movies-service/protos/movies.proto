@@ -1,0 +1,42 @@
+//movies-service/protos/movies.proto
+
+syntax = "proto3";
+
+package movies;
+
+service MovieService {
+  rpc GetMovies (Empty) returns (MovieList);
+  rpc GetMovieById (MovieId) returns (Movie);
+  rpc AddMovie (Movie) returns (Movie);
+  rpc DeleteMovie (MovieId) returns (DeleteResponse);
+  rpc UpdateMovie (UpdateMovieRequest) returns (Movie);
+
+}
+
+message Empty {}
+
+message MovieId {
+  string id = 1;
+}
+
+message Movie {
+  string id = 1;
+  string title = 2;
+  string genre = 3;
+  int32 year = 4;
+}
+
+message MovieList {
+  repeated Movie movies = 1;
+}
+
+message DeleteResponse {
+  bool success = 1;
+}
+
+message UpdateMovieRequest {
+  string id = 1;
+  string title = 2;
+  string genre = 3;
+  int32 year = 4;
+}

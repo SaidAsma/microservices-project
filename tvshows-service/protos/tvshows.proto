@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package tvshows;
+
+service TVShowService {
+  rpc GetTVShows (Empty) returns (TVShowList);
+  rpc GetTVShowById (TVShowId) returns (TVShow);
+  rpc AddTVShow (AddTVShowRequest) returns (TVShow);
+  rpc UpdateTVShow (TVShow) returns (TVShow);
+  rpc DeleteTVShow (TVShowId) returns (Empty);
+}
+
+message Empty {}
+
+message TVShowId {
+  string id = 1;
+}
+
+message TVShow {
+  string id = 1;
+  string title = 2;
+  string genre = 3;
+  int32 year = 4;
+  string image_url = 5; // Nouveau champ pour l'URL de l'image
+}
+
+message TVShowList {
+  repeated TVShow tvshows = 1;
+}
+
+message AddTVShowRequest {
+  string title = 1;
+  string genre = 2;
+  int32 year = 3;
+  string image_url = 4;
+}
